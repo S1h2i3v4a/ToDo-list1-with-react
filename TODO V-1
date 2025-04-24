@@ -1,0 +1,45 @@
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+
+function App() {
+  const [item, setItem] = useState([]);
+  const [date, setDate] = useState("");
+  const [input, setInput] = useState("");
+
+  const I = (e) => setInput(e.target.value);
+  const D = (e) => setDate(e.target.value);
+
+  const cl = () => {
+    setItem([...item, { name: input, date: date }]);
+    setInput("");
+    setDate("");
+  };
+
+  const De = (index) => {
+    setItem(item.filter((_, i) => i !== index));
+  };
+
+  return (
+    <>
+      <h1>ToDo List</h1>
+      <div>
+        <input type="text" value={input} onChange={I} />
+        <input type="date" value={date} onChange={D} />
+        <button onClick={cl}>Add</button>
+      </div>
+      <div>
+        {item.map((i, index) => (
+          <div className="a1" key={index}>
+            <div className="a">{i.name}</div>
+            <div className="b">{i.date}</div>
+            <button onClick={() => De(index)}>Delete</button>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
+
+export default App;
